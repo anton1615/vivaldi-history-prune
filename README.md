@@ -70,7 +70,7 @@ Vivaldi 已完全關閉，安全繼續。
 ## 檔案結構
 
 ```
-C:\Users\Anton\AppData\Local\Vivaldi\User Data\Default\
+%LOCALAPPDATA%\Vivaldi\User Data\Default\
 ├── History                    # 主資料庫（優化目標）
 ├── History.backup.2025-12-22_10-25-10  # 備份檔案
 └── log.2025-12-22_10-25-10.txt         # 執行日誌

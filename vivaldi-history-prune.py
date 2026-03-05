@@ -40,10 +40,10 @@ except ImportError:
     input("\n按任意鍵結束程式...")
     sys.exit(1)
 
-# ==================== 已替換為你的使用者名稱 "Anton" ====================
 # Windows 標準路徑（在 vivaldi://about/ 可確認 Profile Path 是否正確）
-history_path = r"C:\Users\Anton\AppData\Local\Vivaldi\User Data\Default\History"
-# ============================================================================
+history_path = os.path.join(
+    os.environ.get("LOCALAPPDATA", ""), "Vivaldi", "User Data", "Default", "History"
+)
 
 if not os.path.exists(history_path):
     print("錯誤：找不到 History 檔案，請檢查路徑是否正確！")
@@ -55,22 +55,24 @@ if not os.path.exists(history_path):
 file_size_mb = os.path.getsize(history_path) / (1024 * 1024)
 print(f"History 檔案目前大小：{file_size_mb:.2f} MB")
 
+
 # 檢查 Vivaldi 是否仍在執行
 def is_vivaldi_running():
-    for proc in psutil.process_iter(['pid', 'name']):
+    for proc in psutil.process_iter(["pid", "name"]):
         try:
-            if proc.info['name'] and 'vivaldi' in proc.info['name'].lower():
+            if proc.info["name"] and "vivaldi" in proc.info["name"].lower():
                 return True
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             pass
     return False
+
 
 print("\n正在檢查 Vivaldi 是否已完全關閉...")
 if is_vivaldi_running():
     print("警告：偵測到 Vivaldi 仍在執行中（包含背景進程）！")
     print("   繼續執行可能導致 History 檔案損壞或優化失敗。")
     response = input("是否強制繼續？(y/N): ").strip().lower()
-    if response != 'y':
+    if response != "y":
         print("已中止執行，請先完全關閉 Vivaldi 再試。")
         input("\n按任意鍵結束程式...")
         sys.exit(0)
@@ -211,13 +213,13 @@ with open(log_path, "w", encoding="utf-8") as f:
     f.write("\n".join(log_lines))
 
 # 螢幕顯示結果
-print("\n" + "="*50)
+print("\n" + "=" * 50)
 print("完成！已刪除 {} 筆多餘 visits 記錄".format(deleted_visits))
 print(f"優化前檔案大小：{before_size_mb:.2f} MB")
 print(f"優化後檔案大小：{after_size_mb:.2f} MB")
 print(f"減少了：{before_size_mb - after_size_mb:.2f} MB")
 print(f"詳細 log 已儲存至：{os.path.basename(log_path)}")
-print("="*50)
+print("=" * 50)
 
 # 結束前暫停
 input("\n按任意鍵結束程式...")
