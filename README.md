@@ -2,6 +2,23 @@
 
 A tool to optimize Vivaldi browser history database by removing redundant visit records and reducing database size.
 
+## Why This Script?
+
+Most Chromium-based browsers (Chrome, Edge, Brave, etc.) impose a **3-month limit** on browsing history. This means your visited URLs are automatically purged after 90 days, making it impossible to recall websites you visited months or years ago.
+
+**Vivaldi is the only major Chromium-based browser that offers permanent history retention.** This is why I switched to Vivaldi — to maintain a complete record of my browsing activity.
+
+However, permanent history comes with a trade-off: the `History` SQLite database grows continuously, which can eventually impact browser performance (slower history searches, increased memory usage, longer startup times).
+
+**This script solves the problem by:**
+
+- Removing duplicate visit records, keeping only **one record per URL**
+- Preserving the ability to remember which sites you've visited
+- Significantly reducing database size through `VACUUM` compression
+- Maintaining browser performance while retaining browsing history
+
+In essence, it gives you the best of both worlds: permanent history tracking without the performance penalty.
+
 ## Features
 
 - **Auto Backup**: Creates timestamped backup before each execution
