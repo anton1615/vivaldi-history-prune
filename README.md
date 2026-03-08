@@ -2,6 +2,12 @@
 
 A tool to optimize Vivaldi browser history database by removing redundant visit records and reducing database size.
 
+## Security Notice
+
+> This tool works with browser history data, and its generated backups and logs may contain highly sensitive browsing information.
+> Do not upload, sync, or share the produced backup or log files unless you have reviewed and sanitized them carefully.
+> If you use cloud backup or folder synchronization tools, make sure this working directory is excluded.
+
 ## Why This Script?
 
 Most Chromium-based browsers (Chrome, Edge, Brave, etc.) impose a **3-month limit** on browsing history. This means your visited URLs are automatically purged after 90 days, making it impossible to recall websites you visited months or years ago.
